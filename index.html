@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Purple Press</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <header id="header" class="header">
+        <h1>PurplePress</h1>
+        <p class="hero-two">Bringing you the left, the right, and the PURPLE...</p>
+        <form id="js-form" class="form">
+            <!--<label for="js-search-topic">Search Topic</label>-->
+            <input type="text" name="search-topic" id="js-search-topic" placeholder="Search Topic" onfocus="this.value=''"><br>
+
+            <!--<label for="js-max-results">Maximum results to return</label>
+            <input type="number" name="max-results" id="js-max-results" value="10"><br>-->
+
+            <input type="submit" value="Go!">
+        </form>
+        <p id="js-error-message" class="error-message"></p>
+        <a class="jumper js-about-button about-button" href="#about">About PurplePress</a>
+    </header>
+    <main>
+        <section id="about" class="js-about about">
+            <h2>PurplePress returns news articles based on media source bias!</h2>
+            <div class="placeholder">
+                <p>Here will be a screenshot of a results page example.</p>
+            </div>
+        </section>
+
+        <section class="container">
+            <section id="red-results" class="results hidden">
+                <h2>The Right</h2>
+                <ul id="red-results-list">
+                </ul>
+            </section>
+
+            <section id="blue-results" class="results hidden">
+                <h2>The Left</h2>
+                <ul id="blue-results-list">
+                </ul>
+            </section>
+
+            <section id="purple-results" class="results right hidden">
+                <h2>The Purple</h2>
+                <ul id="purple-results-list">
+                </ul>
+            </section>
+        </section>
+
+        <section id="how" class="js-how how">
+            <h2>How?</h2>
+            <p>PurplePress is categorized, and continuously updated, based on the most current media bias research posted at <a href="https://www.adfontesmedia.com">Ad Fontes Media, Inc!</a></p>
+            <div class="placeholder">
+                <p>This will be an image/link to the Media Bias Chart</p>
+            </div>
+            <p>Hop on over to their page to learn more!</p>
+        </section>
+    </main>
+    <footer class="js-footer footer">
+        <a class="jumper" href="#header">Return to Search!</a>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+</body>
+</html>
