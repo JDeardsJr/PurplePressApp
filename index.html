@@ -10,10 +10,10 @@
 <body>
     <header id="header" class="header">
         <h1>PurplePress</h1>
-        <p class="hero-two">Bringing you the left, the right, and the PURPLE...</p>
+        <p class="hero-two">Bringing you today's news from the left, the right, and the PURPLE...</p>
         <form id="js-form" class="form">
             <!--<label for="js-search-topic">Search Topic</label>-->
-            <input type="text" name="search-topic" id="js-search-topic" placeholder="Search Topic" onfocus="this.value=''"><br>
+            <input type="text" name="search-topic" id="js-search-topic" class="js-search-bar search-bar" placeholder="Enter Topic OR Click 'Go!' for Top Stories" onfocus="this.value=''"><br>
 
             <!--<label for="js-max-results">Maximum results to return</label>
             <input type="number" name="max-results" id="js-max-results" value="10"><br>-->
@@ -26,35 +26,47 @@
     <main>
         <section id="about" class="js-about about">
             <h2>PurplePress returns news articles based on media source bias!</h2>
-            <div class="placeholder">
+            <div class="placeholder-results">
                 <p>Here will be a screenshot of a results page example.</p>
             </div>
         </section>
 
-        <section class="container">
-            <section id="red-results" class="results hidden">
-                <h2>The Right</h2>
-                <ul id="red-results-list">
+        <section id="container" class="container">
+            <!--<section id="sources-results" class="results hidden">
+                <h2>sources</h2>
+                <ul id="sources-results-list">
                 </ul>
+            </section>-->
+
+            <section id="red-results" class="results hidden">
+                <h2 class="color-title">The Right</h2>
+                <div class="articles-scroller">
+                    <ul id="red-results-list">
+                    </ul>
+                </div>
             </section>
 
             <section id="blue-results" class="results hidden">
-                <h2>The Left</h2>
-                <ul id="blue-results-list">
-                </ul>
+                <h2 class="color-title">The Left</h2>
+                <div class="articles-scroller">
+                    <ul id="blue-results-list">
+                    </ul>
+                </div>
             </section>
 
             <section id="purple-results" class="results right hidden">
-                <h2>The Purple</h2>
-                <ul id="purple-results-list">
-                </ul>
+                <h2 class="color-title">The Purple</h2>
+                <div class="articles-scroller">
+                    <ul id="purple-results-list">
+                    </ul>
+                </div>
             </section>
         </section>
 
         <section id="how" class="js-how how">
             <h2>How?</h2>
-            <p>PurplePress is categorized, and continuously updated, based on the most current media bias research posted at <a href="https://www.adfontesmedia.com">Ad Fontes Media, Inc!</a></p>
-            <div class="placeholder">
+            <p>PurplePress is categorized, and updated, based on the most current media bias research posted at <a href="https://www.adfontesmedia.com">Ad Fontes Media, Inc!</a></p>
+            <div class="placeholder-map">
                 <p>This will be an image/link to the Media Bias Chart</p>
             </div>
             <p>Hop on over to their page to learn more!</p>
