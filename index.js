@@ -282,7 +282,6 @@ function getNews(queries, searchTerm) {
     .then(responseJson => createNewResponse(responseJson, searchTerm))
 
     .catch(err => {
-      //$('.js-error-container').html(`<p id="js-error-message" class="error-message">Something went wrong: your search cannot be completed as currently entered.  Please check spelling and try again!</p>`);
       errorHtml(searchTerm);
       console.log(err);
     });
