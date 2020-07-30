@@ -13,7 +13,7 @@ const searchUrl = 'https://bing-news-search1.p.rapidapi.com/news/search';
 const defaultImage = 'images/defaultBackgroundA.jpg';
 
 // sets alternating placeholder
-const searchEx = [ 'Enter Topic', '~ OR ~', 'Click "Go!" for Top Stories!' ];
+const searchEx = [ 'Enter Topic', '~ OR ~', 'Click "Go!"', 'for Top Stories!' ];
   setInterval(function() {
     $('#js-search-topic').attr('placeholder', searchEx[searchEx.push(searchEx.shift())-1]);
   }, 2000);
@@ -118,8 +118,14 @@ function handlePrevious() {
 
 // displays, and screen jumps to, results container
 function handleResultsContainer() {
-  $('.container').removeClass('hidden')
+  $('.container').removeClass('hidden');
   window.location.href = '#container';
+}
+
+function handleResultsJump(elementId, elementIdTwo) {
+  if (!$(elementId).hasClass('hidden')) {
+    window.location.href = elementIdTwo;
+  };
 }
 
 // empties previous results
@@ -335,6 +341,8 @@ function watchAbout() {
 function watchRedToggle() {
   $('.js-red-button').on('click', function(event) {
     $('#red-scroller').toggleClass('hidden');
+    //window.location.href = '#red-results';
+    handleResultsJump('#red-scroller', '#red-results');
   });
 }
 
@@ -342,6 +350,8 @@ function watchRedToggle() {
 function watchBlueToggle() {
   $('.js-blue-button').on('click', function(event) {
     $('#blue-scroller').toggleClass('hidden');
+    //window.location.href = '#blue-results';
+    handleResultsJump('#blue-scroller', '#blue-results');
   });
 }
 
@@ -349,6 +359,8 @@ function watchBlueToggle() {
 function watchPurpleToggle() {
   $('.js-purple-button').on('click', function(event) {
     $('#purple-scroller').toggleClass('hidden');
+    //window.location.href = '#purple-results';
+    handleResultsJump('#purple-scroller', '#purple-results');
   });
 }
 
