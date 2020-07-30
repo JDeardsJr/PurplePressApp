@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This is a media bias based news search app">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Purple Press</title>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -10,34 +11,29 @@
     <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <header id="header" class="header">
+    <header role="banner" id="header" class="header">
         <h1>PurplePress</h1>
         <p class="hero-two">Bringing you today's news from the <span class="red-word">RIGHT</span>, the <span class="blue-word">LEFT</span>, and the <span class="purple-word">PURPLE</span>...</p>
-        <div class="error-container">
-            <p id="js-error-message" class="error-message"></p>
-        </div>
+       
         <form id="js-form" class="form">
             <input type="text" name="search-topic" id="js-search-topic" class="js-search-bar search-bar" placeholder="Enter Topic OR Click 'Print!' for Top Stories" onfocus="this.value=''" autocomplete="off"><br>
 
             <input type="submit" value="Go!" class="submit-button">
         </form>
+
+        <div class="js-error-container"></div>
         <a class="jumper js-about-button about-button" href="#main-container">About  <i class="fa fa-angle-double-down"></i></a>
-        
+        <a class="jumper js-previous-button previous-button hidden" href="#container">Previous Results  <i class="fa fa-angle-double-down"></i></a>
+
     </header>
-    <main id="main-container">
+    <main role="main" id="main-container">
 
         <section id="container" class="container hidden">
-            <!--<section id="sources-results" class="results hidden">
-                <h2>sources</h2>
-                <ul id="sources-results-list">
-                </ul>
-            </section>-->
-
     
             <section id="red-results" class="red-background results">
-                <div class="red-title nav">
+                <div class="red-title banner">
                     <h2 class="title">The Right</h2>
-                    <button class="js-red-button nav-button">
+                    <button class="js-red-button toggle-button">
                         <i class="arrow-down"></i>
                     </button>
                 </div>
@@ -48,9 +44,9 @@
             </section>
 
             <section id="blue-results" class="blue-background results">
-                <div class="blue-title nav">
+                <div class="blue-title banner">
                     <h2 class="title">The Left</h2>
-                    <button class="js-blue-button nav-button">
+                    <button class="js-blue-button toggle-button">
                         <i class="arrow-down"></i>
                     </button>
                 </div>
@@ -61,20 +57,20 @@
             </section>
 
             <section id="purple-results" class="purple-background results">
-                <div class="purple-title nav">
+                <div class="purple-title banner">
                     <h2 class="title">The Purple</h2>
-                    <button class="js-purple-button nav-button">
+                    <button class="js-purple-button toggle-button">
                         <i class="purple-arrow-down"></i>
                     </button>
                 </div>
-                <div id="purple-scroller" class="articles-scroller hidden">
+                <div id="purple-scroller" class="articles-scroller purple-scroller hidden">
                     <ul id="purple-results-list">
                     </ul>
                 </div>
             </section>
         </section>
 
-        <div class="about-container">
+        <section id="about-container" class="js-about-container about-container hidden">
             <section id="about" class="js-about about">
                 <h2 class="logo-styling">PurplePress:</h2> 
                 <p>With so much of our news consumption coming from the internet, it is important to understand media sources are more polarizing now than ever.</p>  
@@ -85,13 +81,13 @@
                 <h2 class="logo-styling">How?</h2>
                 <p>Articles are categorized, and updated, based on the most current media bias research found at:</p>
                 <p class="adFontes-style">Ad Fontes Media, Inc.</p>
-                <img class="bias-map" src="images/adFontesMap.png" alt="A map of media source bias">
-                <p class="adFontes-style">Click <a href="https://www.adfontesmedia.com" target="_blank" class="adFontes-link">HERE</a> to visit their page and learn more!</p>
+                <p class="adFontes-p">Click <a href="https://www.adfontesmedia.com" target="_blank" class="adFontes-link">HERE</a> to visit their page and learn more!</p>
             </section>
-        </div>
+        </section>
     </main>
-    <footer class="js-footer footer">
-        <a class="search-return" href="#header">Return to Search <i class="fa fa-angle-double-up"></i></a>
+    <footer role="contentinfo" class="js-footer footer hidden">
+        <a class="search-return" href="#header">Return to <i class="fa fa-search blink"> </i></a>
+        <button class="js-footer-button footer-button hidden">About <span class="press-styling press-border">PP</span></button>
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
     <script src="index.js"></script>
