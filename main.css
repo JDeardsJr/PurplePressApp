@@ -164,7 +164,6 @@ main {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /*max-width: 90%;*/
   max-width: 85%;
   margin: 0 auto 30% auto;
   background: none;

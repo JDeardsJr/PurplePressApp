@@ -122,6 +122,7 @@ function handleResultsContainer() {
   window.location.href = '#container';
 }
 
+// determines if a results element is being displayed and, if so, jumps to element
 function handleResultsJump(elementId, elementIdTwo) {
   if (!$(elementId).hasClass('hidden')) {
     window.location.href = elementIdTwo;
@@ -245,7 +246,6 @@ function handleNewResponse(newResponseJson, searchTerm) {
 // loops through responseJson from article search and pushes any items with a length other than 0 to newResponseJson
 // runs handleNewResponse function
 function createNewResponse(responseJson, searchTerm) {
-  //console.log(responseJson);
 
   let newResponseJson = [];
   for (let i = 0; i < responseJson.length; i++) {
@@ -341,7 +341,6 @@ function watchAbout() {
 function watchRedToggle() {
   $('.js-red-button').on('click', function(event) {
     $('#red-scroller').toggleClass('hidden');
-    //window.location.href = '#red-results';
     handleResultsJump('#red-scroller', '#red-results');
   });
 }
@@ -350,7 +349,6 @@ function watchRedToggle() {
 function watchBlueToggle() {
   $('.js-blue-button').on('click', function(event) {
     $('#blue-scroller').toggleClass('hidden');
-    //window.location.href = '#blue-results';
     handleResultsJump('#blue-scroller', '#blue-results');
   });
 }
@@ -359,7 +357,6 @@ function watchBlueToggle() {
 function watchPurpleToggle() {
   $('.js-purple-button').on('click', function(event) {
     $('#purple-scroller').toggleClass('hidden');
-    //window.location.href = '#purple-results';
     handleResultsJump('#purple-scroller', '#purple-results');
   });
 }
