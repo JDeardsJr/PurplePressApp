@@ -241,7 +241,6 @@ function displayResults(newResponseJson) {
 // if not, it runs errorHtml
 function handleNewResponse(newResponseJson, searchTerm) {
   if (newResponseJson.length === 3) {
-    //if (newResponseJson.length === 1) {
     displayResults(newResponseJson);
   } else {
     searchErrorHtml(searchTerm);
