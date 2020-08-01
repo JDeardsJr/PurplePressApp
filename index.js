@@ -6,11 +6,13 @@ const unsplashUrl = 'https://api.unsplash.com/search/photos';
 
 const rapidApiHost = 'bing-news-search1.p.rapidapi.com';
 
-const rapidApiKey = '83e4845796msh90430094bea1322p1c0a2bjsn3008c6d1999f';
+const rapidApiKey = 'f88b845398mshc367aa15144d97bp1ca15bjsnf2f58f0d9762';
 
 const searchUrl = 'https://bing-news-search1.p.rapidapi.com/news/search';
 
 const defaultImage = 'images/defaultBackgroundA.jpg';
+
+const defaultArticleImage = 'images/defaultArticleImage.png';
 
 // sets alternating placeholder
 const searchEx = [ 'Enter Topic', '~ OR ~', 'Click "Go!"', 'for Top Stories!' ];
@@ -18,8 +20,21 @@ const searchEx = [ 'Enter Topic', '~ OR ~', 'Click "Go!"', 'for Top Stories!' ];
     $('#js-search-topic').attr('placeholder', searchEx[searchEx.push(searchEx.shift())-1]);
   }, 2000);
 
-// generates error html and passes in search term to google search link
-function errorHtml(searchTerm) {
+  // generates error html for errors caused by faulty fetch call
+function errorHtml(err) {
+  $('.js-error-container').html(
+      `<section class="error-container">
+        <h2 id="js-error-message" class="error-message logo-styling">Oops!</h2> 
+        <p>The system has encountered an error.</p>  
+        <p class="p-margin p-color">Please check your network connection <span class="press-styling">and/or</span> try again later.</p>
+      </section>`
+  );
+  console.log('error message ran');
+  window.location.href = '#js-form';
+}
+
+// generates error html for bad search results and passes in search term to google search link
+function searchErrorHtml(searchTerm) {
   $('.js-error-container').html(
       `<section class="error-container">
         <h2 id="js-error-message" class="error-message logo-styling">Oops!</h2> 
@@ -32,75 +47,53 @@ function errorHtml(searchTerm) {
   window.location.href = '#js-form';
 }
 
-// determines which article image to display and generates purple article html
-function purpleHtml(purpleArticle) {
-  let purpleArticleImage = '';
-  if (purpleArticle.image) {
-    purpleArticleImage = purpleArticle.image.thumbnail.contentUrl;
-  } else if (purpleArticle.provider[0].image) {
-    purpleArticleImage = purpleArticle.provider[0].image.thumbnail.contentUrl;
+// determines which article image to display and generates article html
+function articleHtml(article, color) {
+  let articleImage = '';
+  if (article.image) {
+    articleImage = article.image.thumbnail.contentUrl;
+  } else if (article.provider[0].image) {
+    articleImage = article.provider[0].image.thumbnail.contentUrl;
+  } else {
+    articleImage = defaultArticleImage;
   }
-  $('#purple-results-list').append(
+  $(`#${color}-results-list`).append(
     `<li>
       <div class="image-title-container">
-        <img src="${purpleArticleImage}" class="results-img" alt="Article Image">
-        <h3><a href="${purpleArticle.url}" target="_blank" class="purple article-name">${purpleArticle.name}</a></h3>
+        <img src="${articleImage}" class="results-img" alt="Article Image">
+        <h3 class="article-name"><a class="${color} article-name" href="${article.url}" target="_blank">${article.name}</a></h3>
       </div>
       <div>
-        <p class="purple-article-source">${purpleArticle.provider[0].name}</p>
-        <p class="article-description">${purpleArticle.description}</p>
+        <p class="${color}-article-source">${article.provider[0].name}</p>
+        <p class="article-description">${article.description}</p>
       </div>
     </li>`
   );
-  console.log('`purpleHtml` ran')
+console.log('`articleHtml` ran');
 }
 
-// determines which article image to display and generates blue article html
-function blueHtml(blueArticle) {
-  let blueArticleImage = '';
-  if (blueArticle.image) {
-    blueArticleImage = blueArticle.image.thumbnail.contentUrl;
-  } else if (blueArticle.provider[0].image) {
-    blueArticleImage = blueArticle.provider[0].image.thumbnail.contentUrl;
+// resets specific scroller div when toggled open in mobile mode
+// calls handleResultsJump function
+function resetSingleScroller(elementClass, elementId) {
+  if (!elementClass.hasClass('hidden')) {
+    const divId = elementClass.attr('id');
+    const myDiv = document.getElementById(`${divId}`);
+    myDiv.scrollTop = 0;
   }
-  $('#blue-results-list').append(
-    `<li>
-      <div class="image-title-container">
-        <img src="${blueArticleImage}" class="results-img" alt="Article Image">
-        <h3><a href="${blueArticle.url}" target="_blank" class="blue article-name">${blueArticle.name}</a></h3>
-      </div>
-      <div>
-        <p class="blue-article-source">${blueArticle.provider[0].name}</p>
-        <p class="article-description">${blueArticle.description}</p>
-      </div>
-    </li>`
-  );
-  console.log('`blueHtml` ran');
+  handleResultsJump(elementClass, elementId);
 }
 
-// determines which article image to display and generates red article html
-function redHtml(redArticle) {
-    let redArticleImage = '';
-    if (redArticle.image) {
-      redArticleImage = redArticle.image.thumbnail.contentUrl;
-    } else if (redArticle.provider[0].image) {
-      redArticleImage = redArticle.provider[0].image.thumbnail.contentUrl;
-    } 
-    $('#red-results-list').append(
-      `<li>
-        <div class="image-title-container">
-          <img src="${redArticleImage}" class="results-img" alt="Article Image">
-          <h3 class="article-name"><a class="red article-name" href="${redArticle.url}" target="_blank">${redArticle.name}</a></h3>
-        </div>
-        <div>
-          <p class="article-source">${redArticle.provider[0].name}</p>
-          <p class="article-description">${redArticle.description}</p>
-        </div>
-      </li>`
-    );
-  console.log('`redHtml` ran');
+// resets all open scrollers divs to top
+function resetAllScrollers() {
+  const myRedDiv = document.getElementById('red-scroller');
+  const myBlueDiv = document.getElementById('blue-scroller');
+  const myPurpleDiv = document.getElementById('purple-scroller');
+  myRedDiv.scrollTop = 0;
+  myBlueDiv.scrollTop = 0;
+  myPurpleDiv.scrollTop = 0;
 }
 
+// clears previous error message html
 function emptyErrorMessage() {
   $('.js-error-container').empty();
 }
@@ -120,12 +113,19 @@ function handlePrevious() {
 function handleResultsContainer() {
   $('.container').removeClass('hidden');
   window.location.href = '#container';
+  $(document).ready(function(){
+    if ($(window).width() < 700) {
+      $('.articles-scroller').addClass('hidden');
+      console.log('articles collapsed');
+    }
+  });
+  console.log('`handleResultsContainer` ran');
 }
 
 // determines if a results element is being displayed and, if so, jumps to element
-function handleResultsJump(elementId, elementIdTwo) {
-  if (!$(elementId).hasClass('hidden')) {
-    window.location.href = elementIdTwo;
+function handleResultsJump(elementClass, elementId) {
+  if (!elementClass.hasClass('hidden')) {
+    window.location.href = `#${elementId}`;
   };
 }
 
@@ -214,20 +214,24 @@ function displayResults(newResponseJson) {
     if (newResponseJson[i] === newResponseJson[0]) {
       for (let i = 0; i < newResponseJson[0].value.length; i++) {
         const redArticle = newResponseJson[0].value[i];
-        redHtml(redArticle);
+        let color = 'red';
+        articleHtml(redArticle, color);
       }
     } else if (newResponseJson[i] === newResponseJson[1]) {
       for(let i = 0; i < newResponseJson[1].value.length; i++) {
         const blueArticle = newResponseJson[1].value[i];
-        blueHtml(blueArticle); 
+        let color = 'blue';
+        articleHtml(blueArticle, color); 
       }
     } else if (newResponseJson[i] === newResponseJson[2]) {
       for (let i = 0; i < newResponseJson[2].value.length; i++) {
         const purpleArticle = newResponseJson[2].value[i];
-        purpleHtml(purpleArticle);
+        let color = 'purple';
+        articleHtml(purpleArticle, color);
       }
     }
   }
+  resetAllScrollers();
   handleResultsContainer();
   handlePrevious();
   console.log('`displayResults` ran');
@@ -237,9 +241,10 @@ function displayResults(newResponseJson) {
 // if not, it runs errorHtml
 function handleNewResponse(newResponseJson, searchTerm) {
   if (newResponseJson.length === 3) {
+    //if (newResponseJson.length === 1) {
     displayResults(newResponseJson);
   } else {
-    errorHtml(searchTerm);
+    searchErrorHtml(searchTerm);
   }
 }
 
@@ -270,7 +275,7 @@ function getNews(queries, searchTerm) {
   for (let i = 0; i < queries.length; i++) {
     const params = {
       q: queries[i],
-      count: 3,
+      count: 5,
       sortBy: 'relevance'
     };
     const queryString = formatQueryParams(params)
@@ -288,7 +293,7 @@ function getNews(queries, searchTerm) {
     .then(responseJson => createNewResponse(responseJson, searchTerm))
 
     .catch(err => {
-      errorHtml(searchTerm);
+      errorHtml(err);
       console.log(err);
     });
   
@@ -337,27 +342,15 @@ function watchAbout() {
   });
 }
 
-// handles red article toggle click
-function watchRedToggle() {
-  $('.js-red-button').on('click', function(event) {
-    $('#red-scroller').toggleClass('hidden');
-    handleResultsJump('#red-scroller', '#red-results');
-  });
-}
+// handles article toggle button click and runs resetSingleScroller function
+function watchCategoryToggle() {
+  $('.toggle-button').on('click', function(event) {
+    let articleScroller = $(this).closest('section').find('.articles-scroller');
+    let articleElement = $(this).closest('section').attr('id');
 
-// handles blue article toggle click
-function watchBlueToggle() {
-  $('.js-blue-button').on('click', function(event) {
-    $('#blue-scroller').toggleClass('hidden');
-    handleResultsJump('#blue-scroller', '#blue-results');
-  });
-}
+    articleScroller.toggleClass('hidden');
 
-// handles purple article toggle click
-function watchPurpleToggle() {
-  $('.js-purple-button').on('click', function(event) {
-    $('#purple-scroller').toggleClass('hidden');
-    handleResultsJump('#purple-scroller', '#purple-results');
+    resetSingleScroller(articleScroller, articleElement);
   });
 }
 
@@ -372,9 +365,7 @@ function watchFooterToggle() {
 function handlePurplePress() {
   watchForm();
   watchAbout();
-  watchRedToggle();
-  watchBlueToggle();
-  watchPurpleToggle();
+  watchCategoryToggle();
   watchFooterToggle();
 }
 

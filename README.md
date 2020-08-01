@@ -1,6 +1,9 @@
 # PurplePress App
 
-A news app which allows users to search for specific topics, or top news of the day, and displays article results based on the article source's bias.
+A news app which allows users to search for specific topics, or top news of the day, and displays article results based on the article source's bias.  
+
+View the app live at:
+- [https://jdeardsjr.github.io/PurplePressApp/](https://jdeardsjr.github.io/PurplePressApp/)
 
 ## Summary
 
@@ -17,11 +20,7 @@ About:
 
 Results:
 
-![library](screenshots/results.png)
-
-Error:
-
-![recommendations](screenshots/error.png)
+![results](screenshots/results.png)
 
 ## Technologies 
 

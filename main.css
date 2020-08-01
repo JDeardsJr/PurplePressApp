@@ -127,9 +127,13 @@ button, .search-bar {
   display: block;
   font-size: 20px;
   color: rgb(182, 182, 182);
-  text-decoration: none;
+  text-decoration: underline;
   text-shadow: 1px 1px black;
   margin-bottom: 3%;
+}
+
+.p-color {
+  color: rgb(182, 182, 182);
 }
 
 .about-button, .previous-button {
@@ -323,7 +327,7 @@ li {
   color: rgb(245, 0, 245);
 }
 
-.article-source {
+.red-article-source {
   color: rgb(250, 49, 49);
   text-shadow: 3px 3px 3px black;
   margin-bottom: 2%;
