@@ -69,7 +69,7 @@ function articleHtml(article, color) {
       </div>
     </li>`
   );
-console.log('`articleHtml` ran');
+//console.log('`articleHtml` ran');
 }
 
 // resets specific scroller div when toggled open in mobile mode
@@ -116,10 +116,9 @@ function handleResultsContainer() {
   $(document).ready(function(){
     if ($(window).width() < 700) {
       $('.articles-scroller').addClass('hidden');
-      console.log('articles collapsed');
     }
   });
-  console.log('`handleResultsContainer` ran');
+  //console.log('`handleResultsContainer` ran');
 }
 
 // determines if a results element is being displayed and, if so, jumps to element
@@ -207,7 +206,7 @@ function displayImageResults(responseJson) {
 // loops through newResponseJson and sends each item to corresponding color html function
 // ensures results container and previous search button are displayed
 function displayResults(newResponseJson) {
-  console.log(newResponseJson);
+  //console.log(newResponseJson);
 
   emptyResults();
   for (let i = 0; i < newResponseJson.length; i++) {
@@ -234,7 +233,7 @@ function displayResults(newResponseJson) {
   resetAllScrollers();
   handleResultsContainer();
   handlePrevious();
-  console.log('`displayResults` ran');
+  //console.log('`displayResults` ran');
 };
 
 // determines if newResponseJson returned results for all three categories and, if so, runs displayResults function
@@ -280,7 +279,7 @@ function getNews(queries, searchTerm) {
     const queryString = formatQueryParams(params)
     const url = searchUrl + '?' + queryString;
 
-    console.log(url);
+    //console.log(url);
 
  
     requests.push(fetch(url, options));
@@ -293,7 +292,7 @@ function getNews(queries, searchTerm) {
 
     .catch(err => {
       errorHtml(err);
-      console.log(err);
+      //console.log(err);
     });
   
 }
@@ -316,7 +315,8 @@ function getImage(query) {
     })
     .then(responseJson => displayImageResults(responseJson))
     .catch(err => {
-      console.log(err);
+      $('.results').css('background-image', 'linear-gradient(black, black), url(' + defaultImage + ')');
+      //console.log(err);
     });
 }
 

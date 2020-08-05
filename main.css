@@ -277,6 +277,7 @@ main {
     rgba(0, 0, 0, 0.678),
     rgba(0, 0, 0, 0.829)
   );
+  background-blend-mode: saturation;
 }
 
 .purple-scroller {

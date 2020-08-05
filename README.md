@@ -24,7 +24,7 @@ Results:
 
 ## Technologies 
 
-HTML/CSS/JavaScript/jQuery
+HTML/CSS/JavaScript/jQuery/Bing News Search API/Unsplash API
 
 ## Demo
 
